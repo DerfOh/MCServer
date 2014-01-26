@@ -78,7 +78,18 @@ def getBool():
                 print"Invalid option."
                 getBool()
         
-        
+def getInt():
+    while True:
+        userInt = raw_input('Please enter an integer value: ')
+        try:
+                userInt = int(userInt)
+                # if we reach this point, that means we got our number
+                return userInt
+        except ValueError:
+                # if we reach this point, that means the input was bad
+                print('Invalid input')
+
+                
 
 #Prompt user to download needed software
 print "Minecraft Server install script"
@@ -173,9 +184,9 @@ if whitelist == ("y"):
 
 elif whitelist == ("n"):
         pass
+		
+		
 ip = urllib2.urlopen('http://ip.42.pl/raw').read()
-#FIX>>>>>This is currently not functional. It detects Local host "127.0.0.1" rather than external ipadress -Kenneth Andrews
-#displays the current IP address that Python detects automatically and asks the user if it is correct
 print ("\nNow to set the IP address of the server. The current IP detected by this program is: %s" % ip)
 
 isCorrectIP= raw_input("Is this your current IP address? If you're not sure search Google for 'What is my IP address?' (y)es (n)o: ")
@@ -192,7 +203,6 @@ print ("\nThe rest of the settings are optional. If you choose 'n' they will be 
 #This gets the manually set options for the server
 options = raw_input("\n\nwould you like to change the default settings? (y)es (n)o: ")
 
-#FIX>>> Users Must type true/false for most variable or else it will print their inapropriate answer to the prop file. We need to notify the users of this.
 if options == ("y"):
         print ("\n\nenable monsters?")
         monsters = getBool()
@@ -217,51 +227,60 @@ if options == ("y"):
         print("enable hardcore mode?")
         hardcore = getBool()
         
-        print "\n\nif not sure set to 25565"
-        port = raw_input("port number: ")
-        #need function to check for proper input
+        print "\n\nIf not sure choose '(n)o'"
+        print "Would You like to change the default port?"
+        choice = getBool()
+        if choice == 'true':
+                port = getInt()
+        else:
+                port = '25565'
         
-        print "\n\nChoose False if not sure."
-        print("enable rcon?")
+        print "\n\nChoose '(n)o' if not sure."
+        print("Enable rcon?")
         rcon = getBool()
         
-        print "\n\nused for generating maps, if unsure leave blank"
-        seed = raw_input("map seed: ")
-        #need function to check for proper input
+        print "\n\nUsed for generating maps, if unsure leave blank"
+        seed = raw_input('Map seed: ')
+        #need function to check for proper input, this can only be a set of whole non-negative numbers and or characters.
         
         print "\n\nURL link for Texture pack download, if unsure leave blank"
         texture = raw_input("texture pack URL: ")
         #need function to check for proper input, and also is this supposed to download the server pack?
         
-        print "\n\nIf unsure select false"       
+        print "\n\nIf unsure select '(n)o'"       
         print("enable query?")
         query = getBool()
         
         print "\n\n(1.survival) (2.creative)"
-        gamemode = raw_input("gamemode?: ")
+        print("gamemode?: ")
+        gamemode = getInt()
+        
         #need function to check for proper input
         
         print "\n\n(0.peacefull)(1.easy) (2.normal) (3.hard)"
-        difficulty = raw_input("difficulty? 0-3: ")
+        print"difficulty? 0-3: "
+        difficulty = getInt()
         #need function to check for proper input
         
         print "\n\nMessage to apear on server list"
         motd = raw_input("MOTD: ")
         
         print "\n\nreccomended 256"
-        build = raw_input("build height?: ")
-        #need function to check for proper input
+        print "Build height?: "
+        build = getInt()
+        #need function to check for proper input, also what is max build height for minecraft?
         
-        print "\n\n(1.default) (2.flatland) default reccomended"
-        Map_type = raw_input("map type? 1-2: ")
-        #need function to check for proper input
+        print "\n\nMap Type? (1)default (2)flatland"
+        print "Map type? 1-2: "
+        Map_type = getInt()
+        #need function to check for proper input in range 1-2
         
         print "\n\nIf not sure leave blank"
         generator_settings = raw_input("generator settings: ")
         
         print "\n\nreccomended 10"
-        view = raw_input("view distance?: ")
-        #need function to check for proper input
+        print "view distance?: "
+        view = getInt()
         
         print("\n\nallow nether?")
         nether = getBool()
@@ -276,8 +295,8 @@ if options == ("y"):
         print("snooper setting.")
         snooper= getBool()
         
-        max_players= raw_input("\n\nmax players: ")
-        #need function to check for proper input
+        print("\n\nmax players: ")
+        max_players = getInt()
 
 else:
         ##Default Minecraft server properties via http://minecraft.gamepedia.com/Server.properties as of 1/12/14
