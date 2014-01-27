@@ -227,8 +227,8 @@ if options == ("y"):
         print("enable hardcore mode?")
         hardcore = getBool()
         
-        print "\n\nIf not sure choose '(n)o'"
-        print "Would You like to change the default port?"
+        print "\n\nIf not sure choose '(n)o' to use the default port (25565)"
+        print "Would You like to change the default port? "
         choice = getBool()
         if choice == 'true':
                 port = getInt()
@@ -251,35 +251,41 @@ if options == ("y"):
         print("enable query?")
         query = getBool()
         
-        print "\n\n(1.survival) (2.creative)"
-        print("gamemode?: ")
-        gamemode = getInt()
-        
-        #need function to check for proper input
+        print "\n\nGamemode? (1.survival) (2.creative): "
+        print("")
+        while True:
+            gamemode = getInt()
+            if ((gamemode == 1)|(gamemode == 2)):
+                break
         
         print "\n\n(0.peacefull)(1.easy) (2.normal) (3.hard)"
         print"difficulty? 0-3: "
-        difficulty = getInt()
-        #need function to check for proper input
+        while True:
+            difficulty = getInt()
+            if ((difficulty = 0)|(difficulty == 1)|(difficulty== 2)|(difficulty == 3)):
+                break
         
         print "\n\nMessage to apear on server list"
         motd = raw_input("MOTD: ")
+    
+        print "Build height? (Maximum 256): "
+        while True:
+            build = getInt()
+            #Max build height as of 1-27-14 is 256 blocks
+            if ((build < 256)&(build>=0)):
+                break
         
-        print "\n\nreccomended 256"
-        print "Build height?: "
-        build = getInt()
-        #need function to check for proper input, also what is max build height for minecraft?
-        
-        print "\n\nMap Type? (1)default (2)flatland"
-        print "Map type? 1-2: "
-        Map_type = getInt()
-        #need function to check for proper input in range 1-2
+        print "\n\nMap Type? (1)default (2)flatland: "
+        while True:
+            Map_type = getInt()
+            if ((Map_type == 1)|(Map_type == 2)):
+                break
         
         print "\n\nIf not sure leave blank"
         generator_settings = raw_input("generator settings: ")
         
-        print "\n\nreccomended 10"
-        print "view distance?: "
+        print "\n\nReccomended 10"
+        print "View distance?: "
         view = getInt()
         
         print("\n\nallow nether?")
