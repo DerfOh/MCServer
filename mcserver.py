@@ -10,7 +10,6 @@
 # Copyright     2014 Kenneth Andrews, Tanner Gibson, Fredrick Paulin
 #..........................................................................................
 import sys #for quitting application and looking at operating system
-import socket #to find IP address of the machine
 import urllib2 #for downloading
 
 #This downloads any file passed in through the variable URL
@@ -43,6 +42,10 @@ def writeWhitelist():
         whitelistSplit = whitelist_names.split(",")
         whitelistLen =  len(whitelistSplit)
         print "\n\nThe following users are now whitelisted: ", whitelistSplit,"\n"
+        print "Accept Whitelist?"
+        acceptOpsList = getBool()
+        if (acceptOpsList == 'false'):
+                writeWhiteList()
         i=0
         filename = ("white-list.txt")
         target = open(filename, 'w')
@@ -56,6 +59,10 @@ def writeOpsList():
         opsSplit = ops_names.split(",")
         opsLen =  len(opsSplit)
         print "\n\nThe following users are now marked as Operators: ", opsSplit, "\n"
+        print "Accept Ops list?"
+        acceptOpsList = getBool()
+        if (acceptOpsList == 'false'):
+                writeOpsList()
         i=0
         filename = ("ops.txt")
         target = open(filename, 'w')
@@ -173,7 +180,14 @@ else:
 
 writeOpsList()
 
-worldName = raw_input("\n\nWhat do you want to name your world?  ")
+
+#Gets world name and sends it back to the user to make sure they are sure of their input name
+while True:
+        worldName = raw_input("\n\nWhat do you want to name your world?  ")
+        print("World name set to: '%s' would you like to keep it?" % worldName)
+        acceptWorldName = getBool()
+        if (acceptWorldName == 'true'):
+                break
 
 print "\nEnable whitelist?"
 whitelist = raw_input("If you are unsure of whitelist choose 'n': (y)es (n)o: ")
@@ -262,11 +276,16 @@ if options == ("y"):
         print"difficulty? 0-3: "
         while True:
             difficulty = getInt()
-            if ((difficulty = 0)|(difficulty == 1)|(difficulty== 2)|(difficulty == 3)):
+            if ((difficulty == 0)|(difficulty == 1)|(difficulty== 2)|(difficulty == 3)):
                 break
         
         print "\n\nMessage to apear on server list"
-        motd = raw_input("MOTD: ")
+        while True:
+                motd = raw_input("MOTD: ")
+                print("MOTD Set to: '%s' would you like to keep it?" % motd)
+                acceptMOTD = getBool()
+                if (acceptMOTD == 'true'):
+                        break
     
         print "Build height? (Maximum 256): "
         while True:
