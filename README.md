@@ -33,5 +33,6 @@ Instructions
 
 How to submit bug reports
 ==============================================
--https://github.com/nonprofitgibi/pythonappautomation/issues\n
+-https://github.com/nonprofitgibi/pythonappautomation/issues
+
 -http://fredrickpaulin.com/contact-me.html
